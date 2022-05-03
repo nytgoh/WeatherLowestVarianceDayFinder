@@ -8,11 +8,18 @@ namespace WeatherLowestVarianceDayFinder
 {
     class WeatherLowestVarianceDayFinder
     {
-        private static string filePath = "C:\\Users\\nadia.goh\\Downloads\\weather.txt";
+        private static string filePath = "..\\..\\..\\weather.txt";
 
         private static string tableTag = "pre";
 
         private static string toFilterFromTable = "*";
+
+        // The below can be altered if the column in which the specific values are held changes
+        private static int dayColumn = 1;
+
+        private static int maxColumn = 2;
+
+        private static int minColumn = 3;
 
         static void Main(string[] args)
         {
@@ -68,7 +75,7 @@ namespace WeatherLowestVarianceDayFinder
                 if (processLine)
                 {
                     // first three columns are day, max, min
-                    List<string> parts = FetchColumnValuesFromRowLine(line, new List<int>() {1, 2, 3}, toFilterFromTable);
+                    List<string> parts = FetchColumnValuesFromRowLine(line, new List<int>() {dayColumn, maxColumn, minColumn}, toFilterFromTable);
 
                     if (parts == null)
                     {
