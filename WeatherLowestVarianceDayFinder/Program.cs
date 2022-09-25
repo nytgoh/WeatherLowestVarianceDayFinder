@@ -10,8 +10,16 @@ namespace WeatherLowestVarianceDayFinder
 
         static void Main(string[] args)
         {
-            Console.WriteLine("The day with the lowest temperature variance is: " +
-                              GetLowestVarianceDayFromFile(filePath));
+            int result = GetLowestVarianceDayFromFile(filePath);
+
+            if (result == -1)
+            {
+                Console.WriteLine("Could not find valid data within the given file. Please double check the configs under WeatherVarianceLineService are correct.");
+            } 
+            else
+            {
+                Console.WriteLine("The day with the lowest temperature variance is: " + GetLowestVarianceDayFromFile(filePath));
+            }
         }
 
         /// <summary>
@@ -30,7 +38,7 @@ namespace WeatherLowestVarianceDayFinder
             // Process
             WeatherDay lowestVarianceDay = WeatherVarianceLineService.GetWeatherDayWithLowestVariance(weatherDays);
 
-            return lowestVarianceDay.Day;
+            return lowestVarianceDay == null ? -1 : lowestVarianceDay.Day;
         }
     }
 }
